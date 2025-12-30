@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Master Lab</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; padding: 40px; transition: 0.5s; text-align: center; }
+        .container { max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        
+        /* Classes for Toggling */
+        .dark-mode { background-color: #222; color: #fff; }
+        .hidden { display: none; }
+        .success-box { background-color: #d4edda; color: #155724; padding: 15px; margin-top: 20px; border-radius: 5px; }
+        
+        input { width: 80%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ddd; }
+        button { padding: 10px 20px; cursor: pointer; border-radius: 5px; border: none; background: #007bff; color: white; margin: 5px; }
+        #hint { font-size: 0.85em; display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainCard">
+        <h1 id="title">Learning JS & Web Dev</h1>
+        
+        <button id="themeToggle">Toggle Dark Mode</button>
+        <button id="infoToggle">Show/Hide Form</button>
+
+        <hr>
+
+        <form id="devForm">
+            <div id="formContent">
+                <label for="username">Enter Username (No Spaces):</label>
+                <input type="text" id="username" placeholder="Type something..." required>
+                <span id="hint"></span>
+
+                <br>
+                <button type="submit">Submit Data</button>
+            </div>
+        </form>
+
+        <div id="displayArea" class="hidden"></div>
+    </div>
+
+    
+
+    <script>
+        // --- 1. SELECTIONS (getElementById & querySelector) ---
+        const themeBtn = document.querySelector('#themeToggle');
+        const infoBtn = document.getElementById('infoToggle');
+        const form = document.getElementById('devForm');
+        const userInput = document.getElementById('username');
+        const hint = document.getElementById('hint');
+        const displayArea = document.querySelector('#displayArea');
+
+        // --- 2. TOGGLING CLASSES ---
+        themeBtn.onclick = function() {
+            document.body.classList.toggle('dark-mode');
+        };
+
+        infoBtn.onclick = function() {
+            const formDiv = document.getElementById('formContent');
+            formDiv.classList.toggle('hidden');
+            this.textContent = formDiv.classList.contains('hidden') ? "Show Form" : "Hide Form";
+        };
+
+        // --- 3. INPUT EVENT (Real-time feedback) ---
+        userInput.oninput = function() {
+            if (userInput.value.length > 0 && userInput.value.length < 5) {
+                hint.textContent = "Too short...";
+                hint.style.color = "orange";
+            } else if (userInput.value.length >= 5) {
+                hint.textContent = "Length is perfect!";
+                hint.style.color = "green";
+            } else {
+                hint.textContent = "";
+            }
+        };
+
+        // --- 4. ONSUBMIT EVENT (Validation & innerHTML) ---
+        form.onsubmit = function(event) {
+            // Prevent page refresh
+            event.preventDefault();
+
+            const name = userInput.value;
+
+            // Simple Logic Check
+            if (name.includes(" ")) {
+                alert("Spaces are not allowed in the username!");
+            } else {
+                alert("Validation Passed!");
+
+                // DOM Manipulation using innerHTML
+                displayArea.classList.remove('hidden');
+                displayArea.className = "success-box"; // Change style via class
+                displayArea.innerHTML = `
+                    <h3>Progress Saved!</h3>
+                    <p><strong>User:</strong> ${name}</p>
+                    <p>Status: Currently mastering DOM Events & Classes.</p>
+                `;
+                
+                // Change the H1 using getElementById
+                document.getElementById('title').innerText = "Module Completed! ✅";
+            }
+        };
+    </script>
+</body>
+</html>
