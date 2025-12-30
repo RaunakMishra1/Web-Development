@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Event Listeners Lab</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 50px; line-height: 1.6; transition: 0.3s; }
+        .box { width: 300px; padding: 20px; border: 2px solid #333; text-align: center; margin: 20px; border-radius: 10px; cursor: pointer; }
+        .active-box { background-color: #f1c40f; border-color: #e67e22; transform: scale(1.05); }
+        .log { background: #eee; padding: 10px; width: 300px; height: 100px; overflow-y: auto; font-family: monospace; font-size: 12px; }
+        kbd { background: #333; color: white; padding: 2px 5px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <h1>Event Listener Lab</h1>
+    <p>Press any key or hover over the box below!</p>
+
+    <div id="interactiveBox" class="box">
+        Hover or Click Me!
+    </div>
+
+    <div>
+        <button id="enableBtn">Enable Mouse Tracking</button>
+        <button id="disableBtn">Disable Mouse Tracking</button>
+    </div>
+
+    <h3>Activity Log:</h3>
+    <div id="eventLog" class="log">Ready...<br></div>
+
+    <script>
+        const box = document.getElementById('interactiveBox');
+        const log = document.getElementById('eventLog');
+        const enableBtn = document.getElementById('enableBtn');
+        const disableBtn = document.getElementById('disableBtn');
+
+        // Helper function to update the log
+        function updateLog(msg) {
+            log.innerHTML += `> ${msg}<br>`;
+            log.scrollTop = log.scrollHeight; // Auto-scroll to bottom
+        }
+
+        // --- 1. KEYBOARD EVENTS ---
+        // 'keydown' captures the specific key pressed
+        window.addEventListener('keydown', (event) => {
+            updateLog(`Key pressed: <kbd>${event.key}</kbd>`);
+            if(event.key === 'Escape') {
+                box.style.backgroundColor = "white";
+                updateLog("Resetting box color via Escape key.");
+            }
+        });
+
+        // --- 2. MOUSE EVENTS (The Functions) ---
+        const handleMouseEnter = () => {
+            box.classList.add('active-box');
+            box.innerText = "Mouse is INSIDE";
+            updateLog("Mouse entered box");
+        };
+
+        const handleMouseLeave = () => {
+            box.classList.remove('active-box');
+            box.innerText = "Mouse is OUTSIDE";
+            updateLog("Mouse left box");
+        };
+
+        // --- 3. ADD / REMOVE EVENT LISTENERS ---
+        
+        // Function to start listening to mouse movements
+        enableBtn.addEventListener('click', () => {
+            box.addEventListener('mouseenter', handleMouseEnter);
+            box.addEventListener('mouseleave', handleMouseLeave);
+            updateLog("<b>Mouse Tracking Enabled</b>");
+            enableBtn.disabled = true;
+            disableBtn.disabled = false;
+        });
+
+        // Function to stop listening (Cleanup)
+        disableBtn.addEventListener('click', () => {
+            // Note: To remove a listener, you MUST reference the same function name
+            box.removeEventListener('mouseenter', handleMouseEnter);
+            box.removeEventListener('mouseleave', handleMouseLeave);
+            
+            box.classList.remove('active-box');
+            box.innerText = "Tracking Disabled";
+            updateLog("<b>Mouse Tracking Disabled</b>");
+            
+            enableBtn.disabled = false;
+            disableBtn.disabled = true;
+        });
+
+        // Initial state
+        disableBtn.disabled = true;
+    </script>
+</body>
+</html>
