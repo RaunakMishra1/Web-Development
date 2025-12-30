@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h1 id="main-title">Old Title</h1>
+    <p class="description">This is the first paragraph.</p>
+    <div id="container"></div>
+
+    <button onclick="updateDOM()">Transform Page</button>
+
+    <script>
+        function updateDOM() {
+            // 1. Using getElementById to change text
+            const title = document.getElementById("main-title");
+            title.style.color = "blue";
+            title.innerText = "DOM Manipulated!";
+
+            // 2. Using querySelector to target a class
+            const para = document.querySelector(".description");
+            para.style.fontWeight = "bold";
+            para.style.backgroundColor = "yellow";
+
+            // 3. Using innerHTML to inject new HTML structure
+            const box = document.getElementById("container");
+            box.innerHTML = `
+                <div style="border: 2px solid black; padding: 10px; margin-top: 10px;">
+                    <h3>I was added via innerHTML</h3>
+                    <p>You can even add <em>styled</em> tags here!</p>
+                </div>
+            `;
+        }
+    </script>
+
+</body>
+</html>
