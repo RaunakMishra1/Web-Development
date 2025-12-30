@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Defined Functions & Scope</title>
+</head>
+<body>
+<script>
+   
+    function greet(name) {
+        console.log("Hello, " + name + "!");
+    }
+
+   
+    greet("Raunak");
+
+    
+    function scopeDemo() {
+        if (true) {
+            var x = 10;   // function-scoped
+            let y = 20;   // block-scoped
+            const z = 30; // block-scoped and constant
+
+            console.log("Inside block:");
+            console.log("x =", x); 
+            console.log("y =", y); 
+            console.log("z =", z); 
+        }
+
+        console.log("Outside block:");
+        console.log("x =", x); 
+        
+    }
+
+    scopeDemo();
+
+    
+    function addNumbers(a, b) {
+        return a + b;
+    }
+
+    let result = addNumbers(5, 7);
+    console.log("Sum =", result);
+
+</script>
+</body>
+</html>

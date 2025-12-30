@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conditional and Loop Demo</title>
+</head>
+<body>
+<script>
+    // ----- CONDITIONAL STATEMENT -----
+    let num = Number(prompt("Enter a number:"));
+
+    // Using if-else
+    if (num > 0) {
+        console.log(num + " is Positive");
+    } else if (num < 0) {
+        console.log(num + " is Negative");
+    } else {
+        console.log("Number is Zero");
+    }
+
+    // Using switch
+        let a=Number(prompt("Enter first number:"));
+        let b=Number(prompt("Enter second number:"));
+        let ch=prompt("Enter operations(+,-,*,/,%):");
+        switch(ch)
+        {
+            case '+':console.log("Sum = ",a+b);
+            break;
+            case '-':console.log("Difference = ",a-b);
+            break;
+            case '*':console.log("Product = ",a*b);
+            break;
+            case '/':console.log("Divide = ",a/b);
+            break;
+            case '%':console.log("Modulus = ",a%b);
+            break
+            default:console.log("Invalid Input");
+        }
+
+
+
+    // ----- LOOPING STATEMENTS -----
+
+    // For loop: print numbers 1 to 5
+    console.log("For loop:");
+    for (let i = 1; i <= 5; i++) {
+        console.log("i = " + i);
+    }
+
+    // While loop: print numbers 1 to 5
+    console.log("While loop:");
+    let j = 1;
+    while (j <= 5) {
+        console.log("j = " + j);
+        j++;
+    }
+
+    // Do-While loop: print numbers 1 to 5
+    console.log("Do-While loop:");
+    let k = 1;
+    do {
+        console.log("k = " + k);
+        k++;
+    } while (k <= 5);
+
+</script>
+</body>
+</html>

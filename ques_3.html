@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Label-Based Layout</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 60%;
+      margin: 20px auto;
+    }
+    th, td {
+      border: 1px solid #333;
+      padding: 10px;
+      text-align: center;
+    }
+    caption {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+    .label {
+      background-color: #f0f0f0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <table>
+    <caption>User Information Form</caption>
+    <tr>
+         <td class="label">Name</td>
+      <td colspan="2">Raunak Mishra</td>
+    </tr>
+    <tr>
+      <td class="label">Email</td>
+      <td colspan="2">raunak@gmail.com</td>
+    </tr>
+    <tr>
+      <td class="label">Gender</td>
+      <td>Male</td>
+      <td rowspan="2" class="label" style="vertical-align: middle;">Profile Picture</td>
+    </tr>
+    <tr>
+      <td class="label">Country</td>
+      <td>India</td>
+    </tr>
+    <tr>
+      <td class="label">Bio</td>
+      <td colspan="2" style="text-align: left;">Raunak is a curious and persistent learner focused on web development and system optimization.</td>
+    </tr>
+  </table>
+
+</body>
+</html>
